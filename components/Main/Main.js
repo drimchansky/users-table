@@ -1,9 +1,15 @@
 // packages
 import React from 'react'
+import { format } from 'date-fns'
+import parseISO from 'date-fns/parseISO'
 // styles
 import styles from './Main.module.css'
 
-const Main = ({ users }) => {
+const Main = ({ users, blackList, setBlackList }) => {
+  const deleteHandler = (id) => {
+    setBlackList([...blackList, id])
+  }
+
   return (
     <main className={styles.main}>
       <div className={styles.row}>
@@ -29,17 +35,26 @@ const Main = ({ users }) => {
             </tr>
 
             {users.data.map((user) => {
-              return (
-                <tr className={styles.row} key={user.id}>
-                  <td className={styles.col}>{user.username}</td>
-                  <td className={styles.col}>{user.email}</td>
-                  <td className={styles.col}>{user.registration_date}</td>
-                  <td className={styles.col}>{user.rating}</td>
-                  <td className={styles.col}>
-                    <button>x</button>
-                  </td>
-                </tr>
-              )
+              if (!blackList.includes(user.id)) {
+                return (
+                  <tr className={styles.row} key={user.id}>
+                    <td className={styles.col}>{user.username}</td>
+                    <td className={styles.col}>{user.email}</td>
+                    <td className={styles.col}>
+                      {format(parseISO(user.registration_date), 'd.M.yyyy')}
+                    </td>
+                    <td className={styles.col}>{user.rating}</td>
+                    <td className={styles.col}>
+                      <button
+                        onClick={() => {
+                          deleteHandler(user.id)
+                        }}>
+                        x
+                      </button>
+                    </td>
+                  </tr>
+                )
+              }
             })}
           </tbody>
         </table>

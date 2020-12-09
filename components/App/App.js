@@ -14,8 +14,6 @@ const App = () => {
   const [users, setUsers] = useState(null)
   const [blackList, setBlackList] = useState([])
 
-  console.log(blackList)
-
   useEffect(() => {
     axios.get('https://5ebbb8e5f2cfeb001697d05c.mockapi.io/users').then(
       (response) => {
@@ -37,7 +35,7 @@ const App = () => {
       {appState.loading ? (
         <div className={styles.caption}>Загрузка...</div>
       ) : (
-        <Main users={users} />
+        <Main users={users} blackList={blackList} setBlackList={setBlackList} />
       )}
     </Container>
   )
