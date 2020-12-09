@@ -2,7 +2,7 @@ import Head from 'next/head'
 
 export default function Home() {
   return (
-    <div>
+    <>
       <Head>
         <title>Список пользователей</title>
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -11,6 +11,6 @@ export default function Home() {
         <meta name="theme-color" content="#ffffff" />
       </Head>
       <h1>Hello</h1>
-    </div>
+    </>
   )
 }

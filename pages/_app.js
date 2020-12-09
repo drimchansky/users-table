@@ -1,3 +1,4 @@
+import "../utils/fonts.css";
 import "normalize.css";
 
 function MyApp({ Component, pageProps }) {
