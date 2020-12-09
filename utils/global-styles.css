@@ -6,12 +6,15 @@
 
 :root {
   --color-black: #111111;
+  --color-lightgray: #f7f7f7;
+
+  --color-highlight: #00b0f0;
 }
 
 html {
+  height: 100%;
   font-size: 16px;
   font-family: 'Roboto', sans-serif;
-  background-color: #f7f7f7;
 
   @media (min-width: 960px) {
     font-size: 18px;
@@ -20,4 +23,9 @@ html {
   @media (min-width: 1920px) {
     font-size: 20px;
   }
+}
+
+body {
+  height: 100%;
+  background-color: var(--color-lightgray);
 }
