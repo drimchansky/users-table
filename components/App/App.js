@@ -5,7 +5,7 @@ import axios from 'axios'
 import Container from '../Container'
 import Header from '../Header'
 import SearchBar from '../SearchBar'
-import Table from '../Table'
+import Main from '../Main'
 
 const App = () => {
   const [appState, setAppState] = useState({ loading: true, error: false })
@@ -17,6 +17,7 @@ const App = () => {
       (response) => {
         setUsers(response)
         console.log('fetched')
+        setAppState(false)
       },
       (error) => {
         appState({ error: true })
@@ -28,7 +29,7 @@ const App = () => {
     <Container>
       <Header>Список пользователей</Header>
       <SearchBar />
-      <Table />
+      <Main appState={appState} />
     </Container>
   )
 }
