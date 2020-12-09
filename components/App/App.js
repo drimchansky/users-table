@@ -10,16 +10,18 @@ import Main from '../Main'
 import styles from './App.module.css'
 
 const App = () => {
-  const [appState, setAppState] = useState({ loading: true, error: false })
+  const [appState, setAppState] = useState({ loading: true, error: false, blackList: [] })
   const [users, setUsers] = useState(null)
-  const [blackList, setBlackList] = useState([])
+  const [searchValue, setSearchValue] = useState('')
+
+  console.log(appState)
 
   useEffect(() => {
     axios.get('https://5ebbb8e5f2cfeb001697d05c.mockapi.io/users').then(
       (response) => {
         setUsers(response)
         setTimeout(() => {
-          setAppState({ loading: false })
+          setAppState({ ...appState, loading: false })
         }, 1000)
       },
       (error) => {
@@ -28,14 +30,22 @@ const App = () => {
     )
   }, [])
 
+  const handlingArray = (arr, filterBy, sortBy) => {
+    if (arr) {
+      return arr
+    }
+  }
+
+  const processedUsers = handlingArray(users)
+
   return (
     <Container>
       <Header>Список пользователей</Header>
-      <SearchBar />
+      <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
       {appState.loading ? (
         <div className={styles.caption}>Загрузка...</div>
       ) : (
-        <Main users={users} blackList={blackList} setBlackList={setBlackList} />
+        <Main users={processedUsers} appState={appState} setAppState={setAppState} />
       )}
     </Container>
   )

@@ -5,9 +5,9 @@ import parseISO from 'date-fns/parseISO'
 // styles
 import styles from './Main.module.css'
 
-const Main = ({ users, blackList, setBlackList }) => {
+const Main = ({ users, appState, setAppState }) => {
   const deleteHandler = (id) => {
-    setBlackList([...blackList, id])
+    setAppState({ ...appState, blackList: [...appState.blackList, id] })
   }
 
   return (
@@ -35,7 +35,8 @@ const Main = ({ users, blackList, setBlackList }) => {
             </tr>
 
             {users.data.map((user) => {
-              if (!blackList.includes(user.id)) {
+              console.log(':', appState)
+              if (!appState.blackList.includes(user.id)) {
                 return (
                   <tr className={styles.row} key={user.id}>
                     <td className={styles.col}>{user.username}</td>
