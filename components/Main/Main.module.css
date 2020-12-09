@@ -24,9 +24,9 @@
 }
 
 .col {
-  flex-basis: 25%;
-}
+  flex-basis: 23%;
 
-.loading {
-  font-size: 1.5rem;
+  &:last-child {
+    flex-basis: 8%;
+  }
 }
