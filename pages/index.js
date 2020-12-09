@@ -1,4 +1,6 @@
+// components
 import Head from 'next/head'
+import Container from '../components/Container'
 
 export default function Home() {
   return (
@@ -10,7 +12,7 @@ export default function Home() {
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <meta name="theme-color" content="#ffffff" />
       </Head>
-      <h1>Hello</h1>
+      <Container>Имя пользователя</Container>
     </>
   )
 }
