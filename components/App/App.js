@@ -14,12 +14,10 @@ const App = () => {
   const [users, setUsers] = useState(null)
   const [searchValue, setSearchValue] = useState('')
 
-  console.log(appState)
-
   useEffect(() => {
     axios.get('https://5ebbb8e5f2cfeb001697d05c.mockapi.io/users').then(
-      (response) => {
-        setUsers(response)
+      ({ data }) => {
+        setUsers(data)
         setTimeout(() => {
           setAppState({ ...appState, loading: false })
         }, 1000)
@@ -30,13 +28,28 @@ const App = () => {
     )
   }, [])
 
-  const handlingArray = (arr, filterBy, sortBy) => {
+  const handlingArray = (arr, searchValue, sortBy) => {
+    let resultArray
+
+    // check erray exists
     if (arr) {
+      // chack search value exists
+      if (searchValue) {
+        resultArray = arr.filter((item) => {
+          return (
+            item.username.toLowerCase().includes(searchValue) ||
+            item.email.toLowerCase().includes(searchValue)
+          )
+        })
+        return resultArray
+      }
+      // check sort parameter exists
+
       return arr
     }
   }
 
-  const processedUsers = handlingArray(users)
+  const processedUsers = handlingArray(users, searchValue)
 
   return (
     <Container>

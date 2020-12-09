@@ -34,8 +34,7 @@ const Main = ({ users, appState, setAppState }) => {
               <th className={styles.col}></th>
             </tr>
 
-            {users.data.map((user) => {
-              console.log(':', appState)
+            {users.map((user) => {
               if (!appState.blackList.includes(user.id)) {
                 return (
                   <tr className={styles.row} key={user.id}>

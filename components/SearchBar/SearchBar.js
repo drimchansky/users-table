@@ -5,8 +5,7 @@ import styles from './SearchBar.module.css'
 
 const SearchBar = ({ searchValue, setSearchValue }) => {
   const handleChange = (e) => {
-    console.log(searchValue)
-    setSearchValue(e.target.value)
+    setSearchValue(e.target.value.toLowerCase())
   }
 
   return (
