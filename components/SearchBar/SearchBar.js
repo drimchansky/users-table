@@ -8,10 +8,25 @@ const SearchBar = ({ appState, setAppState }) => {
     setAppState({ ...appState, searchValue: e.target.value.toLowerCase() })
   }
 
+  const handleClear = () => {
+    setAppState({ ...appState, searchValue: '', sortBy: null })
+  }
+
+  const clearFilters = () => {
+    if (appState.searchValue.length > 0 || appState.sortBy) {
+      return (
+        <button className={styles.button} onClick={handleClear}>
+          Очистить фильтр
+        </button>
+      )
+    }
+  }
+
   return (
     <section className={styles.searchbar}>
       <input className={styles.input} type="text" onChange={handleChange} />
-      <button className={styles.button}>Очистить фильтр</button>
+
+      {clearFilters()}
     </section>
   )
 }
