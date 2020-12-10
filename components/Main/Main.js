@@ -11,10 +11,10 @@ const Main = ({ users, appState, setAppState }) => {
   }
 
   const sortHandler = (type) => {
-    if (appState.sortBy === 'DATE_ASC') {
+    if (type === 'DATE_ASC' && appState.sortBy === 'DATE_ASC') {
       let newType = 'DATE_DESC'
       setAppState({ ...appState, sortBy: newType })
-    } else if (appState.sortBy === 'RATING_ASC') {
+    } else if (type === 'RATING_ASC' && appState.sortBy === 'RATING_ASC') {
       let newType = 'RATING_DESC'
       setAppState({ ...appState, sortBy: newType })
     } else {
