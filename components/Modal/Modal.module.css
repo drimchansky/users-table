@@ -13,5 +13,29 @@
   top: 50%;
   transform: translate(-50%, -50%);
   background: var(--color-white);
-  padding: 1rem;
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+
+  & p {
+    margin: 0;
+  }
+
+  & button {
+    background: var(--color-highlight);
+    color: #fff;
+    border: unset;
+    border-radius: 10px;
+    padding: 0.5rem 2rem;
+    margin-top: 1rem;
+  }
+
+  & button:nth-child(3) {
+    margin-left: 1rem;
+  }
+
+  & button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
 }

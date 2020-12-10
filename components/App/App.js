@@ -100,6 +100,9 @@ const App = () => {
             return 0
           })
           break
+
+        default:
+          break
       }
     }
 

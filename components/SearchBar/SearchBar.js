@@ -34,7 +34,6 @@ const SearchBar = ({ appState, setAppState }) => {
         onChange={handleChange}
         disabled={appState.loading ? true : false}
       />
-      <searchIcon />
 
       {clearFilters()}
     </section>

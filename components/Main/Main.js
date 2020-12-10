@@ -27,14 +27,31 @@ const Main = ({ users, appState, setAppState }) => {
 
   return (
     <main className={styles.main}>
-      <div className={styles.row}>
-        Сортировка: <button onClick={() => sortHandler('DATE_ASC')}>Дата регистрации</button>
-        <button onClick={() => sortHandler('RATING_ASC')}>Рейтинг</button>
+      <div className={`${styles.row} ${styles.sort}`}>
+        Сортировка:{' '}
+        <button onClick={() => sortHandler('DATE_ASC')}>
+          <span
+            className={
+              appState.sortBy === 'DATE_ASC' || appState.sortBy === 'DATE_DESC' ? styles.active : ''
+            }>
+            Дата регистрации
+          </span>
+        </button>
+        <button onClick={() => sortHandler('RATING_ASC')}>
+          <span
+            className={
+              appState.sortBy === 'RATING_ASC' || appState.sortBy === 'RATING_DESC'
+                ? styles.active
+                : ''
+            }>
+            Рейтинг
+          </span>
+        </button>
       </div>
       <div className={styles.wrapper}>
-        <table className={styles.table} border="1px">
+        <table className={styles.table}>
           <tbody>
-            <tr className={styles.row}>
+            <tr className={`${styles.row} ${styles.title}`}>
               <th className={styles.col}>Имя пользователя</th>
               <th className={styles.col}>E-mail</th>
               <th className={styles.col}>Дата регистрации</th>
@@ -46,16 +63,18 @@ const Main = ({ users, appState, setAppState }) => {
               if (!appState.blackList.includes(user.id)) {
                 return (
                   <tr className={styles.row} key={user.id}>
-                    <td className={styles.col}>{user.username}</td>
-                    <td className={styles.col}>{user.email}</td>
-                    <td className={styles.col}>
-                      {format(parseISO(user.registration_date), 'd.M.yyyy')}
+                    <td className={`${styles.col} ${styles.user}`}>{user.username}</td>
+                    <td className={`${styles.col} ${styles.cell}`}>{user.email}</td>
+                    <td className={`${styles.col} ${styles.cell}`}>
+                      {format(parseISO(user.registration_date), 'dd.MM.yyyy')}
                     </td>
-                    <td className={styles.col}>{user.rating}</td>
+                    <td className={`${styles.col} ${styles.cell}`}>{user.rating}</td>
                     <td className={styles.col}>
-                      <button value={user.id} onClick={clickHandler}>
-                        x
-                      </button>
+                      <button
+                        data-label="Удалить пользователя"
+                        className={styles.button}
+                        value={user.id}
+                        onClick={clickHandler}></button>
                     </td>
                   </tr>
                 )
