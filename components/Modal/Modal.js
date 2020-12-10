@@ -6,7 +6,6 @@ import styles from './Modal.module.css'
 
 const Modal = ({ appState, setAppState }) => {
   const confirmHandler = () => {
-    console.log(appState)
     document.body.style.overflow = 'unset'
     setAppState({
       ...appState,

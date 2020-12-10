@@ -3,9 +3,9 @@ import React from 'react'
 // styles
 import styles from './SearchBar.module.css'
 
-const SearchBar = ({ searchValue, setSearchValue }) => {
+const SearchBar = ({ appState, setAppState }) => {
   const handleChange = (e) => {
-    setSearchValue(e.target.value.toLowerCase())
+    setAppState({ ...appState, searchValue: e.target.value.toLowerCase() })
   }
 
   return (

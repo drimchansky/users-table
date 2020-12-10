@@ -60,8 +60,6 @@ const Main = ({ users, appState, setAppState }) => {
                       <button value={user.id} onClick={clickHandler}>
                         x
                       </button>
-
-                      <Modal appState={appState} setAppState={setAppState} />
                     </td>
                   </tr>
                 )
@@ -70,6 +68,7 @@ const Main = ({ users, appState, setAppState }) => {
           </tbody>
         </table>
       </div>
+      <Modal appState={appState} setAppState={setAppState} />
     </main>
   )
 }

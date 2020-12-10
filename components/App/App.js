@@ -17,10 +17,10 @@ const App = () => {
     sortBy: null,
     modalIsOpen: false,
     userForDelete: null,
+    searchValue: '',
   })
 
   const [users, setUsers] = useState(null)
-  const [searchValue, setSearchValue] = useState('')
 
   useEffect(() => {
     axios.get('https://5ebbb8e5f2cfeb001697d05c.mockapi.io/users').then(
@@ -106,12 +106,12 @@ const App = () => {
     return resultArray
   }
 
-  const processedUsers = handlingArray(users, searchValue, appState.sortBy)
+  const processedUsers = handlingArray(users, appState.searchValue, appState.sortBy)
 
   return (
     <Container>
       <Header>Список пользователей</Header>
-      <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
+      <SearchBar appState={appState} setAppState={setAppState} />
       {appState.loading ? (
         <div className={styles.caption}>Загрузка...</div>
       ) : (
