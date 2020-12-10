@@ -13,10 +13,6 @@ const Main = ({ users, appState, setAppState }) => {
     setAppState({ ...appState, modalIsOpen: true, userForDelete: e.target.value })
   }
 
-  const deleteHandler = () => {
-    setAppState({ ...appState, blackList: [...appState.blackList, id] })
-  }
-
   const sortHandler = (type) => {
     if (type === 'DATE_ASC' && appState.sortBy === 'DATE_ASC') {
       let newType = 'DATE_DESC'

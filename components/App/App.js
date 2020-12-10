@@ -28,7 +28,7 @@ const App = () => {
         setUsers(data)
         setTimeout(() => {
           setAppState({ ...appState, loading: false })
-        }, 1000)
+        }, 500)
       },
       (error) => {
         appState({ error: true })

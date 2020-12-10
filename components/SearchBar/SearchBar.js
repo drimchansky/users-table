@@ -27,12 +27,14 @@ const SearchBar = ({ appState, setAppState }) => {
   return (
     <section className={styles.searchbar}>
       <input
+        placeholder="Поиск по имени или e-mail"
         value={appState.searchValue}
         className={styles.input}
         type="text"
         onChange={handleChange}
         disabled={appState.loading ? true : false}
       />
+      <searchIcon />
 
       {clearFilters()}
     </section>

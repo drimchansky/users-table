@@ -9,17 +9,25 @@ const Modal = ({ appState, setAppState }) => {
     document.body.style.overflow = 'unset'
     setAppState({
       ...appState,
-      blackList: [...appState.blackList, appState.userForDelete],
+      modalIsOpen: false,
+      blackList: [{ ...appState.blackList.push(appState.userForDelete) }],
+    })
+  }
+
+  const declineHandler = () => {
+    setAppState({
+      ...appState,
       modalIsOpen: false,
       userForDelete: null,
     })
+    document.body.style.overflow = 'unset'
   }
 
   if (!appState.modalIsOpen) {
     return null
   }
   return ReactDom.createPortal(
-    <div className={styles.overlay}>
+    <div className={styles.overlay} onClick={declineHandler}>
       <div className={styles.modal}>
         <p>Вы хотите удалить пользователя?</p>
         <button
@@ -28,7 +36,12 @@ const Modal = ({ appState, setAppState }) => {
           }}>
           Да
         </button>
-        <button>Нет</button>
+        <button
+          onClick={() => {
+            declineHandler()
+          }}>
+          Нет
+        </button>
       </div>
     </div>,
     document.getElementById('portal')
