@@ -25,6 +25,7 @@
 
 .col {
   flex-basis: 23%;
+  width: 23%;
 
   &:last-child {
     flex-basis: 8%;

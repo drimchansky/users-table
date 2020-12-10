@@ -13,6 +13,7 @@ export default function Home() {
         <meta name="theme-color" content="#ffffff" />
       </Head>
       <App />
+      <div id="portal"></div>
     </>
   )
 }

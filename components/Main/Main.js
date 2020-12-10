@@ -2,11 +2,18 @@
 import React from 'react'
 import { format } from 'date-fns'
 import parseISO from 'date-fns/parseISO'
+// components
+import Modal from '../Modal'
 // styles
 import styles from './Main.module.css'
 
 const Main = ({ users, appState, setAppState }) => {
-  const deleteHandler = (id) => {
+  const clickHandler = (e) => {
+    document.body.style.overflow = 'hidden'
+    setAppState({ ...appState, modalIsOpen: true, userForDelete: e.target.value })
+  }
+
+  const deleteHandler = () => {
     setAppState({ ...appState, blackList: [...appState.blackList, id] })
   }
 
@@ -50,12 +57,11 @@ const Main = ({ users, appState, setAppState }) => {
                     </td>
                     <td className={styles.col}>{user.rating}</td>
                     <td className={styles.col}>
-                      <button
-                        onClick={() => {
-                          deleteHandler(user.id)
-                        }}>
+                      <button value={user.id} onClick={clickHandler}>
                         x
                       </button>
+
+                      <Modal appState={appState} setAppState={setAppState} />
                     </td>
                   </tr>
                 )

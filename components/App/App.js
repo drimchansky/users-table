@@ -15,6 +15,8 @@ const App = () => {
     error: false,
     blackList: [],
     sortBy: null,
+    modalIsOpen: false,
+    userForDelete: null,
   })
 
   const [users, setUsers] = useState(null)
@@ -61,7 +63,6 @@ const App = () => {
             }
             return 0
           })
-          console.log('DATE_ASC')
           break
 
         case 'DATE_DESC':
@@ -74,7 +75,6 @@ const App = () => {
             }
             return 0
           })
-          console.log('DATE_DESC')
           break
 
         case 'RATING_ASC':
@@ -87,7 +87,6 @@ const App = () => {
             }
             return 0
           })
-          console.log('RATING_ASC')
           break
 
         case 'RATING_DESC':
@@ -100,7 +99,6 @@ const App = () => {
             }
             return 0
           })
-          console.log('RATING_DESC')
           break
       }
     }
