@@ -1,5 +1,5 @@
 .main {
-  margin-top: 50px;
+  margin-top: 6rem;
 }
 
 .wrapper {
@@ -26,6 +26,23 @@
 .col {
   flex-basis: 23%;
   width: 23%;
+  flex: 1;
+
+  &:nth-child(1) {
+    min-width: 180px;
+  }
+  &:nth-child(2) {
+    min-width: 290px;
+  }
+  &:nth-child(3) {
+    min-width: 130px;
+  }
+  &:nth-child(4) {
+    min-width: 70px;
+  }
+  &:nth-child(5) {
+    min-width: 50px;
+  }
 
   &:last-child {
     flex-basis: 8%;

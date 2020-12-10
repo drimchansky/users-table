@@ -15,16 +15,24 @@ const SearchBar = ({ appState, setAppState }) => {
   const clearFilters = () => {
     if (appState.searchValue.length > 0 || appState.sortBy) {
       return (
-        <button className={styles.button} onClick={handleClear}>
-          Очистить фильтр
-        </button>
+        <div className={styles.wrapper}>
+          <button className={styles.button} onClick={handleClear}>
+            Очистить фильтр
+          </button>
+        </div>
       )
     }
   }
 
   return (
     <section className={styles.searchbar}>
-      <input className={styles.input} type="text" onChange={handleChange} />
+      <input
+        value={appState.searchValue}
+        className={styles.input}
+        type="text"
+        onChange={handleChange}
+        disabled={appState.loading ? true : false}
+      />
 
       {clearFilters()}
     </section>
