@@ -50,15 +50,55 @@ const App = () => {
 
     // check sort value exists
     if (sortBy) {
-      // resultArray.sort((a, b) => {
-      //   if (a.registration_date < b.registration_date) {
-      //     return -1
-      //   }
-      //   if (a.registration_date > b.registration_date) {
-      //     return 1
-      //   }
-      //   return 0
-      // })
+      switch (sortBy) {
+        case 'DATE_ASC':
+          resultArray.sort((a, b) => {
+            if (a.registration_date < b.registration_date) {
+              return -1
+            }
+            if (a.registration_date > b.registration_date) {
+              return 1
+            }
+            return 0
+          })
+          break
+
+        case 'DATE_DESC':
+          resultArray.sort((a, b) => {
+            if (a.registration_date < b.registration_date) {
+              return 1
+            }
+            if (a.registration_date > b.registration_date) {
+              return -1
+            }
+            return 0
+          })
+          break
+
+        case 'RATING_ASC':
+          resultArray.sort((a, b) => {
+            if (a.rating < b.rating) {
+              return 1
+            }
+            if (a.rating > b.rating) {
+              return -1
+            }
+            return 0
+          })
+          break
+
+        case 'RATING_DESC':
+          resultArray.sort((a, b) => {
+            if (a.rating < b.rating) {
+              return -1
+            }
+            if (a.rating > b.rating) {
+              return 1
+            }
+            return 0
+          })
+          break
+      }
     }
 
     return resultArray
