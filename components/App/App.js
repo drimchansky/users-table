@@ -10,7 +10,13 @@ import Main from '../Main'
 import styles from './App.module.css'
 
 const App = () => {
-  const [appState, setAppState] = useState({ loading: true, error: false, blackList: [] })
+  const [appState, setAppState] = useState({
+    loading: true,
+    error: false,
+    blackList: [],
+    sortBy: null,
+  })
+
   const [users, setUsers] = useState(null)
   const [searchValue, setSearchValue] = useState('')
 
@@ -29,27 +35,36 @@ const App = () => {
   }, [])
 
   const handlingArray = (arr, searchValue, sortBy) => {
-    let resultArray
+    let resultArray = arr
 
-    // check erray exists
-    if (arr) {
-      // chack search value exists
-      if (searchValue) {
-        resultArray = arr.filter((item) => {
-          return (
-            item.username.toLowerCase().includes(searchValue) ||
-            item.email.toLowerCase().includes(searchValue)
-          )
-        })
-        return resultArray
-      }
-      // check sort parameter exists
-
-      return arr
+    // check search value exists
+    if (searchValue) {
+      // search functionality
+      resultArray = arr.filter((item) => {
+        return (
+          item.username.toLowerCase().includes(searchValue) ||
+          item.email.toLowerCase().includes(searchValue)
+        )
+      })
     }
+
+    // check sort value exists
+    if (sortBy) {
+      // resultArray.sort((a, b) => {
+      //   if (a.registration_date < b.registration_date) {
+      //     return -1
+      //   }
+      //   if (a.registration_date > b.registration_date) {
+      //     return 1
+      //   }
+      //   return 0
+      // })
+    }
+
+    return resultArray
   }
 
-  const processedUsers = handlingArray(users, searchValue)
+  const processedUsers = handlingArray(users, searchValue, appState.sortBy)
 
   return (
     <Container>

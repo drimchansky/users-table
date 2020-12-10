@@ -10,27 +10,32 @@ const Main = ({ users, appState, setAppState }) => {
     setAppState({ ...appState, blackList: [...appState.blackList, id] })
   }
 
+  const sortHandler = (type) => {
+    if (appState.sortBy === 'DATE_ASC') {
+      let newType = 'DATE_DESC'
+      setAppState({ ...appState, sortBy: newType })
+    } else if (appState.sortBy === 'RATING_ASC') {
+      let newType = 'RATING_DESC'
+      setAppState({ ...appState, sortBy: newType })
+    } else {
+      setAppState({ ...appState, sortBy: type })
+    }
+  }
+
   return (
     <main className={styles.main}>
       <div className={styles.row}>
-        Сортировка: <button>Дата регистрации</button> <button>Рейтинг</button>
+        Сортировка: <button onClick={() => sortHandler('DATE_ASC')}>Дата регистрации</button>
+        <button onClick={() => sortHandler('RATING_ASC')}>Рейтинг</button>
       </div>
       <div className={styles.wrapper}>
         <table className={styles.table} border="1px">
           <tbody>
             <tr className={styles.row}>
-              <th className={styles.col}>
-                <button>Имя пользователя</button>
-              </th>
-              <th className={styles.col}>
-                <button>E-mail</button>
-              </th>
-              <th className={styles.col}>
-                <button>Дата регистрации</button>
-              </th>
-              <th className={styles.col}>
-                <button>Рейтинг</button>
-              </th>
+              <th className={styles.col}>Имя пользователя</th>
+              <th className={styles.col}>E-mail</th>
+              <th className={styles.col}>Дата регистрации</th>
+              <th className={styles.col}>Рейтинг</th>
               <th className={styles.col}></th>
             </tr>
 
