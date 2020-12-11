@@ -4,15 +4,18 @@ import React from 'react'
 import styles from './SearchBar.module.css'
 
 const SearchBar = ({ appState, setAppState }) => {
+  // handle input change
   const handleChange = (e) => {
-    setAppState({ ...appState, searchValue: e.target.value.toLowerCase() })
+    setAppState({ ...appState, searchValue: e.target.value })
   }
 
+  // handle clear button click
   const handleClear = () => {
     setAppState({ ...appState, searchValue: '', sortBy: null })
   }
 
   const clearFilters = () => {
+    // return compoent if only if search query of sort parameter exists
     if (appState.searchValue.length > 0 || appState.sortBy) {
       return (
         <div className={styles.wrapper}>
@@ -21,21 +24,24 @@ const SearchBar = ({ appState, setAppState }) => {
           </button>
         </div>
       )
+    } else {
+      return null
     }
   }
 
   return (
     <section className={styles.searchbar}>
       <input
+        label="Поиск по имени или e-mail"
         placeholder="Поиск по имени или e-mail"
         value={appState.searchValue}
         className={styles.input}
         type="text"
         onChange={handleChange}
-        disabled={appState.loading ? true : false}
+        disabled={appState.loading || appState.error ? true : false}
       />
 
-      {clearFilters()}
+      {appState.error ? null : clearFilters()}
     </section>
   )
 }

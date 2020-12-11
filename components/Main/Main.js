@@ -8,15 +8,13 @@ import Modal from '../Modal'
 import styles from './Main.module.css'
 
 const Main = ({ users, appState, setAppState }) => {
+  // handle click on delete button
   const clickHandler = (e) => {
     document.body.style.overflow = 'hidden'
     setAppState({ ...appState, modalIsOpen: true, userForDelete: e.target.value })
   }
 
-  // function isInArray(value, array) {
-  //   return array.indexOf(value) > -1
-  // }
-
+  // handle sort buttons, define wich one will'be apply
   const sortHandler = (type) => {
     if (type === 'DATE_ASC' && appState.sortBy === 'DATE_ASC') {
       let newType = 'DATE_DESC'
@@ -28,6 +26,8 @@ const Main = ({ users, appState, setAppState }) => {
       setAppState({ ...appState, sortBy: type })
     }
   }
+
+  // confirm delete user handler for modal
   const confirmHandler = () => {
     console.log(appState)
     document.body.style.overflow = 'unset'
@@ -39,6 +39,7 @@ const Main = ({ users, appState, setAppState }) => {
     console.log(appState)
   }
 
+  // decline delete user for modal
   const declineHandler = () => {
     setAppState({
       ...appState,
@@ -48,6 +49,11 @@ const Main = ({ users, appState, setAppState }) => {
     document.body.style.overflow = 'unset'
   }
 
+  // no render component if errors occured
+  if (appState.error) {
+    return null
+  }
+
   return (
     <main className={styles.main}>
       <div className={`${styles.row} ${styles.sort}`}>
@@ -55,6 +61,7 @@ const Main = ({ users, appState, setAppState }) => {
         <button onClick={() => sortHandler('DATE_ASC')}>
           <span
             className={
+              // set active class to sort button
               appState.sortBy === 'DATE_ASC' || appState.sortBy === 'DATE_DESC' ? styles.active : ''
             }>
             Дата регистрации
@@ -63,6 +70,7 @@ const Main = ({ users, appState, setAppState }) => {
         <button onClick={() => sortHandler('RATING_ASC')}>
           <span
             className={
+              // set active class to sort button
               appState.sortBy === 'RATING_ASC' || appState.sortBy === 'RATING_DESC'
                 ? styles.active
                 : ''
@@ -82,8 +90,8 @@ const Main = ({ users, appState, setAppState }) => {
               <th className={styles.col}></th>
             </tr>
 
+            {/* render users */}
             {users.map((user) => {
-              console.log(appState)
               if (!appState.blackList.includes(user.id)) {
                 return (
                   <tr className={styles.row} key={user.id}>
@@ -95,7 +103,7 @@ const Main = ({ users, appState, setAppState }) => {
                     <td className={`${styles.col} ${styles.cell}`}>{user.rating}</td>
                     <td className={styles.col}>
                       <button
-                        data-label="Удалить пользователя"
+                        aria-label="Удалить пользователя"
                         className={styles.button}
                         value={user.id}
                         onClick={clickHandler}></button>
@@ -107,6 +115,7 @@ const Main = ({ users, appState, setAppState }) => {
           </tbody>
         </table>
       </div>
+      {/* place modal here for useful props passing, will be render in root component by portal */}
       <Modal appState={appState} confirmHandler={confirmHandler} declineHandler={declineHandler} />
     </main>
   )

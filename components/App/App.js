@@ -10,6 +10,7 @@ import Main from '../Main'
 import styles from './App.module.css'
 
 const App = () => {
+  // global app state
   const [appState, setAppState] = useState({
     loading: true,
     error: false,
@@ -20,22 +21,26 @@ const App = () => {
     searchValue: '',
   })
 
+  // state for users
   const [users, setUsers] = useState(null)
 
+  // get users
   useEffect(() => {
     axios.get('https://5ebbb8e5f2cfeb001697d05c.mockapi.io/users').then(
       ({ data }) => {
         setUsers(data)
         setTimeout(() => {
           setAppState({ ...appState, loading: false })
+          // best practice (?) for avoid blicking loading indicator
         }, 500)
       },
       (error) => {
-        appState({ error: true })
+        setAppState({ error: true })
       }
     )
   }, [])
 
+  // search function
   const handlingArray = (arr, searchValue, sortBy) => {
     let resultArray = arr
 
@@ -44,13 +49,13 @@ const App = () => {
       // search functionality
       resultArray = arr.filter((item) => {
         return (
-          item.username.toLowerCase().includes(searchValue) ||
-          item.email.toLowerCase().includes(searchValue)
+          item.username.toLowerCase().includes(searchValue.toLowerCase()) ||
+          item.email.toLowerCase().includes(searchValue.toLowerCase())
         )
       })
     }
 
-    // check sort value exists
+    // filter functions
     if (sortBy) {
       switch (sortBy) {
         case 'DATE_ASC':
@@ -105,17 +110,17 @@ const App = () => {
           break
       }
     }
-
     return resultArray
   }
 
+  // process users via search and sort functions
   const processedUsers = handlingArray(users, appState.searchValue, appState.sortBy)
 
   return (
     <Container>
       <Header>Список пользователей</Header>
       <SearchBar appState={appState} setAppState={setAppState} />
-      {appState.loading ? (
+      {appState.loading || appState.error ? (
         <div className={styles.caption}>Загрузка...</div>
       ) : (
         <Main users={processedUsers} appState={appState} setAppState={setAppState} />

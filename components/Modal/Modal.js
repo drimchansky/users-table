@@ -5,10 +5,12 @@ import ReactDom from 'react-dom'
 import styles from './Modal.module.css'
 
 const Modal = ({ appState, confirmHandler, declineHandler }) => {
+  // return null if modal is not open
   if (!appState.modalIsOpen) {
     return null
   }
 
+  // add event listner for clsoe modal on ESC
   useEffect(() => {
     document.addEventListener('keyup', (e) => {
       const key = e.key
@@ -16,10 +18,7 @@ const Modal = ({ appState, confirmHandler, declineHandler }) => {
     })
   })
 
-  const outsideClickHandler = (e) => {
-    declineHandler()
-  }
-
+  // component will render inside root component
   return ReactDom.createPortal(
     <>
       <div className={styles.modal}>
@@ -38,7 +37,11 @@ const Modal = ({ appState, confirmHandler, declineHandler }) => {
           Нет
         </button>
       </div>
-      <div className={styles.overlay} onClick={outsideClickHandler}></div>
+      <div
+        className={styles.overlay}
+        onClick={() => {
+          declineHandler()
+        }}></div>
     </>,
 
     document.getElementById('portal')
