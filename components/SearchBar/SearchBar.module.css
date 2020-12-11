@@ -25,7 +25,7 @@
   cursor: pointer;
   color: #666666;
   margin-top: 20px;
-  border: unset;
+  border: none;
   background-color: transparent;
   padding-left: 35px;
   background-image: url('/icons/broom.svg');
