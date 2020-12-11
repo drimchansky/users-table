@@ -1,0 +1,43 @@
+.overlay {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.7);
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--color-white);
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 101;
+
+  & p {
+    margin: 0;
+  }
+
+  & button {
+    background: var(--color-highlight);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 0.5rem 2rem;
+    margin-top: 1rem;
+  }
+
+  & button:nth-child(3) {
+    margin-left: 1rem;
+  }
+
+  & button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+}
