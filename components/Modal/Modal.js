@@ -1,36 +1,31 @@
 // packages
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactDom from 'react-dom'
 // styles
 import styles from './Modal.module.css'
 
-const Modal = ({ appState, setAppState }) => {
-  const confirmHandler = () => {
-    document.body.style.overflow = 'unset'
-    setAppState({
-      ...appState,
-      modalIsOpen: false,
-      blackList: [{ ...appState.blackList.push(appState.userForDelete) }],
-    })
-  }
-
-  const declineHandler = () => {
-    setAppState({
-      ...appState,
-      modalIsOpen: false,
-      userForDelete: null,
-    })
-    document.body.style.overflow = 'unset'
-  }
-
+const Modal = ({ appState, confirmHandler, declineHandler }) => {
   if (!appState.modalIsOpen) {
     return null
   }
+
+  useEffect(() => {
+    document.addEventListener('keyup', (e) => {
+      const key = e.key
+      if (key === 'Escape' || key === 'Esc' || key === 27) declineHandler()
+    })
+  })
+
+  const outsideClickHandler = (e) => {
+    declineHandler()
+  }
+
   return ReactDom.createPortal(
-    <div className={styles.overlay} onClick={declineHandler}>
+    <>
       <div className={styles.modal}>
         <p>Вы хотите удалить пользователя?</p>
         <button
+          autoFocus
           onClick={() => {
             confirmHandler()
           }}>
@@ -43,7 +38,9 @@ const Modal = ({ appState, setAppState }) => {
           Нет
         </button>
       </div>
-    </div>,
+      <div className={styles.overlay} onClick={outsideClickHandler}></div>
+    </>,
+
     document.getElementById('portal')
   )
 }

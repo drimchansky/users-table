@@ -13,6 +13,10 @@ const Main = ({ users, appState, setAppState }) => {
     setAppState({ ...appState, modalIsOpen: true, userForDelete: e.target.value })
   }
 
+  // function isInArray(value, array) {
+  //   return array.indexOf(value) > -1
+  // }
+
   const sortHandler = (type) => {
     if (type === 'DATE_ASC' && appState.sortBy === 'DATE_ASC') {
       let newType = 'DATE_DESC'
@@ -23,6 +27,25 @@ const Main = ({ users, appState, setAppState }) => {
     } else {
       setAppState({ ...appState, sortBy: type })
     }
+  }
+  const confirmHandler = () => {
+    console.log(appState)
+    document.body.style.overflow = 'unset'
+    setAppState({
+      ...appState,
+      modalIsOpen: false,
+      blackList: [...appState.blackList, appState.userForDelete],
+    })
+    console.log(appState)
+  }
+
+  const declineHandler = () => {
+    setAppState({
+      ...appState,
+      modalIsOpen: false,
+      userForDelete: null,
+    })
+    document.body.style.overflow = 'unset'
   }
 
   return (
@@ -60,6 +83,7 @@ const Main = ({ users, appState, setAppState }) => {
             </tr>
 
             {users.map((user) => {
+              console.log(appState)
               if (!appState.blackList.includes(user.id)) {
                 return (
                   <tr className={styles.row} key={user.id}>
@@ -83,7 +107,7 @@ const Main = ({ users, appState, setAppState }) => {
           </tbody>
         </table>
       </div>
-      <Modal appState={appState} setAppState={setAppState} />
+      <Modal appState={appState} confirmHandler={confirmHandler} declineHandler={declineHandler} />
     </main>
   )
 }
