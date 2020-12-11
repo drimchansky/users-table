@@ -32,7 +32,7 @@ const SearchBar = ({ appState, setAppState }) => {
   return (
     <section className={styles.searchbar}>
       <input
-        label="Поиск по имени или e-mail"
+        title="Поиск по имени или e-mail"
         placeholder="Поиск по имени или e-mail"
         value={appState.searchValue}
         className={styles.input}
